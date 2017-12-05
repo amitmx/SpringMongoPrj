@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +48,14 @@ public class EmployeeController
 		repo.deleteAll();
 		return new ProjectStatus("Success..");
 		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/employee/{firstName}")
+	public List<Employee> getEmployee(@PathVariable String firstName)
+	{
+		List<Employee> list= new ArrayList<Employee>();
+		list.add(repo.findByfirstName(firstName));
+		return list;
 	}
 
 }
