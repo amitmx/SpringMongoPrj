@@ -50,12 +50,17 @@ public class EmployeeController
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/employee/{firstName}")
+	@RequestMapping(method=RequestMethod.GET, value="/employee/firstName/{firstName}")
 	public List<Employee> getEmployee(@PathVariable String firstName)
 	{
-		List<Employee> list= new ArrayList<Employee>();
-		list.add(repo.findByfirstName(firstName));
-		return list;
+		return repo.findByfirstName(firstName);
+		
+	}
+	
+	@RequestMapping (method=RequestMethod.GET, value="/employee/lastName/{lastName}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Employee> getEmployeeByLastName(@PathVariable String lastName)
+	{
+		return repo.findBylastName(lastName);
 	}
 
 }
